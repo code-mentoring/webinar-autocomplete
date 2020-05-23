@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 
 
 async function start() {
@@ -29,10 +30,11 @@ async function start() {
     res.json(searched);
   });
 
+  app.use(cors());
   app.use(router);
 
 
-  app.listen(8080);
+  app.listen(9999);
   console.log('API is listening on http://localhost:8080');
 }
 
