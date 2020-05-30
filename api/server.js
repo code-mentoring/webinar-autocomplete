@@ -14,7 +14,7 @@ async function start() {
     const {q} = req.query;
     if (!q) return next(new Error('No query found'));
 
-    const searched = users.filter(u => {
+    let searched = users.filter(u => {
       const name = `${u.name.first} ${u.name.last}`.toLowerCase();
       /**
        * This is what the "includes" function does. (Substring search)
@@ -26,9 +26,11 @@ async function start() {
        */
       return name.includes(q.toLowerCase());
     });
+    searched = searched.slice(0, 9);
 
     res.json(searched);
   });
+
 
   app.use(cors());
   app.use(router);
